@@ -1,0 +1,48 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #080c18;
+  --surface:   #0d1221;
+  --surface2:  #111827;
+  --border:    #1e2a40;
+  --border2:   #243450;
+  --blue:      #38bdf8;
+  --blue-dim:  #1e3a5f;
+  --red:       #f87171;
+  --red-dim:   #3a1a1a;
+  --green:     #4ade80;
+  --green-dim: #1a3a1a;
+  --yellow:    #fbbf24;
+  --yellow-dim:#3a2f00;
+  --purple:    #a78bfa;
+  --text:      #e2e8f0;
+  --muted:     #64748b;
+  --faint:     #334155;
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* scrollbar */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* animations */
+@keyframes spin     { to { transform: rotate(360deg); } }
+@keyframes pulse    { 0%,100%{opacity:1} 50%{opacity:.4} }
+@keyframes fadeIn   { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+@keyframes scanline { 0%{top:-10%} 100%{top:110%} }
+
+input, button { font-family: inherit; }
+input:focus   { outline: none; border-color: var(--blue) !important;
+                box-shadow: 0 0 0 2px #38bdf820; }
+button:focus  { outline: none; }
+
+.fade-in { animation: fadeIn .3s ease both; }

@@ -1,0 +1,69 @@
+{
+  "name": "sentinelguard",
+  "version": "1.0.0",
+  "description": "SentinelGuard - Python + Electron Antivirus",
+  "main": "main.js",
+  "author": "SentinelGuard Project",
+  "license": "MIT",
+  "scripts": {
+    "start":          "set NODE_ENV=development && electron .",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build:electron": "electron-builder --win --x64",
+    "dev":            "set NODE_ENV=development && electron ."
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.7"
+  },
+  "devDependencies": {
+    "electron":         "^31.0.0",
+    "electron-builder": "^24.9.1",
+    "concurrently":     "^8.2.2"
+  },
+  "build": {
+    "appId":       "com.sentinelguard.app",
+    "productName": "SentinelGuard",
+    "copyright":   "© 2025 SentinelGuard",
+    "asar":        true,
+    "directories": {
+      "output":    "dist_electron",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "frontend/dist/**/*",
+      "node_modules/**",
+      "!node_modules/.cache/**",
+      "!node_modules/.bin/**"
+    ],
+    "extraResources": [
+      {
+        "from": "backend/dist/SentinelGuard_backend.exe",
+        "to":   "backend/SentinelGuard_backend.exe"
+      },
+      {
+        "from": "models",
+        "to":   "backend/models",
+        "filter": ["**/*.pkl"]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch":   ["x64"]
+        }
+      ],
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "oneClick":              false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName":          "SentinelGuard",
+      "deleteAppDataOnUninstall": false,
+      "installerLanguages":    ["en_US"]
+    }
+  }
+}
